@@ -1,7 +1,8 @@
 <br>
 
 <p align="center">
-<img src="https://github.com/Shuashuaa/v-kit/blob/main/@shuashuaa-v-kit.png" width="300" />
+<!-- <img src="https://github.com/Shuashuaa/v-kit/blob/main/@shuashuaa-v-kit.png" width="300" /> -->
+<img src="/@flex-toast.png" width="300" />
 </p>
 
 <h1 align="center">Flex-Toast</h1>
