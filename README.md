@@ -22,4 +22,4 @@ vite/webpack, vuetify and pinia. up-to-date, ready for local-deployment and full
 </p>
 
 <br>
-"# flex-toast" 
+<!-- "# flex-toast"  -->
