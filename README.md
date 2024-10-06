@@ -8,7 +8,7 @@
 <h1 align="center">Flex-Toast</h1>
 
 <p align="center">
-A simple way to start your vue-laravel-spa projects.
+A minified and flexible alternative to sweetalert 
 <!-- A collection of vue-laravel-spa boilerplates Powered by vue, laravel, <br>
 vite/webpack, vuetify and pinia. up-to-date, ready for local-deployment and fully customizable. -->
 <!-- Looking for a boilerplate for your next project? Kickstart it with v-kit-spa now! -->
