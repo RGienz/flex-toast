@@ -23,3 +23,50 @@ vite/webpack, vuetify and pinia. up-to-date, ready for local-deployment and full
 
 <br>
 <!-- "# flex-toast"  -->
+
+
+## flex-toast body
+
+> box display 
+  
+| Commands                    | Action                                       |
+| :-------------------------- | :--------------------------------------------|
+| `All Property`              | use camelCase                                |
+
+<br>
+
+## icon display - mdi icon
+
+> Icon - mdi- 
+  
+| Commands                    | Action                                       |
+| :-------------------------- | :--------------------------------------------|
+| `icon`                      | display mdi icon                             |
+| `iconLeft`                  | margin-left                                  |
+| `iconRight`                 | margin-right                                 |
+| `iconTop`                   | margin-top                                   |
+| `iconButton`                | icon-button                                  |
+| `iconSize`                  | icon-size                                    |
+| `iconColor`                 | icon-color                                   |
+| `iconHeight`                | icon-height                                  |
+| `iconWidth`                 | icon-width                                   |
+<br> 
+
+## Title
+
+> How to use title 
+  
+| Commands                    | Action                                       |
+| :-------------------------- | :--------------------------------------------|
+| `title`                     | display title                                |
+| `titleLeft`                 | margin-left                                  |
+| `titleRight`                | margin-right                                 |
+| `titleTop`                  | margin-top                                   |
+| `titleButton`               | title-button                                 |
+| `titleSize`                 | title-size                                   |
+| `titleColor`                | title-color                                  |
+| `titleHeight`               | title-height                                 |
+| `titleWidth`                | title-width                                  |
+<br>
+
+

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.5.10/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta charset="utf-8" />
+
+    
+</head>
+<body>
+    <div id="app">
+        <v-app>
+            <v-main>
+
+                <div style="display: flex; justify-content: center; align-items: center; width: 100vw; height: 100vh;background-color: gray;">
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <h2>Flex-Toast</h2>
+                        <v-btn @click="displayAlert()">button</v-btn>
+                    </div>
+                </div>
+
+            </v-main>
+        </v-app>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.5.10/dist/vuetify.js"></script>
+
+    <script type="module">
+        import { flexToast } from './designed/box-designed.js'; 
+    
+        new Vue({
+            el: '#app',
+            vuetify: new Vuetify(),
+            data: () => ({
+             
+            }),
+            mounted(){
+                // this.displayAlert()
+            },
+            methods: {
+                displayAlert() {
+                    flexToast({ 
+                        // position: "top-end",
+                        // icon: "check-circle", 
+                        // icon: "account", 
+                        // title: "Flex-Toast Alert Working",
+                        // titleSize : '20px',
+                        // titleMarginLeft : '30px',
+                        // showConfirmButton: true, 
+                        // confirmButtonText: "Got it!", 
+                        // // showLoadingBar: false,
+                        // timer: 100, 
+                        // backgroundColor: 'rgba(0, 128, 0, 0.8)', 
+                        // textColor: 'white', 
+                        // fontSize: '20px',
+                        // // width: '300px', 
+                        // // height: '80px', 
+                        // loadingColor: 'blue', 
+                        // iconColor: 'orange', 
+                        // bodyBackgroundImage: 'url("https://cdn-icons-png.flaticon.com/512/400/400833.png")',
+                    
+                    });
+                }, 
+            },
+        });
+    </script>
+    <style>
+     
+    </style>
+    
+</body>
+</html>
