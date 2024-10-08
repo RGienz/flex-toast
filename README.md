@@ -25,6 +25,28 @@ vite/webpack, vuetify and pinia. up-to-date, ready for local-deployment and full
 <!-- "# flex-toast"  -->
 
 
+## install first
+
+```sh
+npm install
+```
+<br>
+
+## run on cmd 
+```sh
+npm run flex-toast
+```
+<br>
+
+## run on project 
+```sh
+ http://localhost:4512/
+```
+<br>
+
+
+## flex-toast body
+>run 
 ## flex-toast body
 
 > box display 
