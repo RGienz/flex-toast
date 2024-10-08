@@ -38,15 +38,12 @@ npm run flex-toast
 ```
 <br>
 
-## run on project 
+## run project on browser
 ```sh
  http://localhost:4512/
 ```
 <br>
 
-
-## flex-toast body
->run 
 ## flex-toast body
 
 > box display 
