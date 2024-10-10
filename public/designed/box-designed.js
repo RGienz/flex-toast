@@ -7,7 +7,7 @@ function flexToast(options) {
         titleSize : '30px',
         showConfirmButton: true, 
         // ButtonbackgroundColor : 'rgba(65, 22, 160, 0.2)',
-        // bodyBackgroundImage: 'url("https://cdn-icons-png.flaticon.com/512/400/400833.png")',
+        // bodyBackgroundImage: 'url("/sample-image.png")',
         displayBackgroundImage: false,
         backgroundImageHeight : '400px',
         backgroundImageWidth : '512px',
@@ -24,6 +24,8 @@ function flexToast(options) {
         // titleMarginTop: '50px',
         Buttonpadding: '10px', 
         ButtonborderRadius: '16px', 
+
+        moveDiv: false,
         // zIndex: '1000', 
         // iconHeight: '24px', 
         // iconWidth: '24px', 
@@ -47,31 +49,7 @@ function flexToast(options) {
 
     const alertDiv = document.createElement('div');
     alertDiv.style.position = 'fixed';
-    // alertDiv.style.backgroundImage  = settings.bodyBackgroundImage;
-    // alertDiv.style.height = '100px';
-    // alertDiv.style.width = '500px';
-    // alertDiv.style.backgroundSize = 'cover';
-    // alertDiv.style.backgroundSize = '250px';
-    // alertDiv.style.backgroundSize = '250px 250px';
-    // alertDiv.style.backgroundSize = '380px 190px';
-    // alertDiv.style.backgroundPosition = 'center';
-    // alertDiv.style.position = 'fixed';
-    // alertDiv.style.position = settings.position;
-
-    // if (settings.displayBackgroundImage === true) {
-    //     console.log('meron')
-    //     alertDiv.style.backgroundImage = settings.bodyBackgroundImage;
-    //     alertDiv.style.backgroundColor = 'transparent'; 
-    // } else if(settings.displayBackgroundImage === false){
-    //     console.log('wala')
-    //     alertDiv.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
-    // }else {
-    //     console.log('else')
-    //     // alertDiv.style.backgroundColor = settings.backgroundColor; // Show background color
-    //     alertDiv.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';  // Show background color
-
-    // }
-
+   
   
     if (settings.bodyBackgroundImage) {
         console.log('meron');
@@ -92,11 +70,8 @@ function flexToast(options) {
         alertDiv.style.width = '400px';
     }
 
-
-    // Apply styles dynamically
     Object.keys(defaultOptions).forEach(key => {
-        // console.log(key,'asckjas')
-        alertDiv.style[key] = settings[key]; // Always apply settings, which includes defaults
+        alertDiv.style[key] = settings[key]; 
     });
 
     //! Set position
@@ -125,13 +100,45 @@ function flexToast(options) {
             break;
     }
 
-    // Create icon element if provided
+
+    // display for X and Y coordinates
+     const positionDisplay = document.createElement('div');
+     positionDisplay.style.position = 'absolute';
+     positionDisplay.style.bottom = '10px'; 
+     positionDisplay.style.left = '10px'; 
+     positionDisplay.style.color = 'white'; 
+     alertDiv.appendChild(positionDisplay);
+
+
+    if (settings.moveDiv) {
+        let offsetX, offsetY;
+
+        alertDiv.onmousedown = function (e) {
+            offsetX = e.clientX - alertDiv.getBoundingClientRect().left;
+            offsetY = e.clientY - alertDiv.getBoundingClientRect().top;
+
+            document.onmousemove = function (e) {
+                const newX = e.clientX - offsetX;
+                const newY = e.clientY - offsetY;
+
+                alertDiv.style.left = newX + 'px';
+                alertDiv.style.top = newY + 'px';
+                positionDisplay.textContent = `X: ${newX}, Y: ${newY}`;
+                console.log(`X: ${newX}, Y: ${newY}`);
+            };
+
+            document.onmouseup = function () {
+                document.onmousemove = null;
+                document.onmouseup = null;
+            };
+        };
+    }
+
+    
     if (settings.icon) {
         const iconElement = document.createElement('div');
-        // const iconElement = document.createElement('span');
         iconElement.style.position = 'absolute';
         iconElement.className = `mdi mdi-${settings.icon}`; 
-        // iconElement.style.marginRight = '15px'; 
         iconElement.style.height = settings.iconHeight; 
         iconElement.style.width = settings.iconWidth; 
         iconElement.style.color = settings.iconColor; 
@@ -145,10 +152,8 @@ function flexToast(options) {
      
     }
    
-    // Create title element
     const titleElement = document.createElement('span');
     titleElement.textContent = settings.title;
-    // titleElement.style.marginTop = settings.titleMarginTop;
         titleElement.style.position = 'absolute';
 
         titleElement.style.height = settings.titleHeight; 
@@ -171,13 +176,11 @@ function flexToast(options) {
         confirmButton.style.marginLeft = settings.ButtonLeft;
         confirmButton.style.marginRight = settings.ButtonRight;
         confirmButton.style.marginTop = settings.ButtonTop;
-        // confirmButton.style.marginTop = '100px';
         confirmButton.style.marginButtom = settings.ButtonButtom;
         confirmButton.style.padding = settings.Buttonpadding;
         confirmButton.style.border = settings.Buttonborder;
         confirmButton.style.borderRadius = settings.ButtonborderRadius;
         confirmButton.style.backgroundColor = settings.ButtonbackgroundColor;
-        // confirmButton.style.color
         confirmButton.style.color = settings.Buttoncolor;
         confirmButton.style.cursor = settings.Buttoncursor;
         confirmButton.style.fontSize = settings.ButtonfontSize; 
@@ -185,10 +188,10 @@ function flexToast(options) {
 
         // Add hover effect
         // confirmButton.onmouseover = () => {
-        //     confirmButton.style.backgroundColor = '#0056b3'; // Darker blue on hover
+        //     confirmButton.style.backgroundColor = '#0056b3';
         // };
         // confirmButton.onmouseout = () => {
-        //     confirmButton.style.backgroundColor = '#007BFF'; // Original color
+        //     confirmButton.style.backgroundColor = '#007BFF'; 
         // };
 
         confirmButton.onclick = () => {
@@ -199,39 +202,7 @@ function flexToast(options) {
         };
         alertDiv.appendChild(confirmButton);
     }
-    // if (settings.showConfirmButton) {
-        
-    //     const confirmButton = document.createElement('button');
-    //     confirmButton.style.position = 'absolute';
-    //     confirmButton.textContent = settings.confirmButtonText;
-    //     confirmButton.style.marginLeft = '10px';
-    //     confirmButton.style.padding = '5px 10px'; // Padding for the button
-    //     confirmButton.style.border = 'none'; // Remove default border
-    //     confirmButton.style.borderRadius = '5px'; // Rounded corners
-    //     confirmButton.style.backgroundColor = '#007BFF'; // Bootstrap primary color
-    //     confirmButton.style.color
-    //     confirmButton.style.color = 'white'; // Text color
-    //     confirmButton.style.cursor = 'pointer'; // Pointer cursor on hover
-    //     confirmButton.style.fontSize = '16px'; // Font size
-    //     confirmButton.style.transition = 'background-color 0.3s'; // Transition for hover effect
-
-    //     // Add hover effect
-    //     confirmButton.onmouseover = () => {
-    //         confirmButton.style.backgroundColor = '#0056b3'; // Darker blue on hover
-    //     };
-    //     confirmButton.onmouseout = () => {
-    //         confirmButton.style.backgroundColor = '#007BFF'; // Original color
-    //     };
-
-    //     confirmButton.onclick = () => {
-    //         alertDiv.style.opacity = '0';
-    //         setTimeout(() => {
-    //             document.body.removeChild(alertDiv);
-    //         }, 500);
-    //     };
-    //     alertDiv.appendChild(confirmButton);
-    // }
-
+ 
     document.body.appendChild(alertDiv);
    
     alertDiv.style.opacity = '1';
