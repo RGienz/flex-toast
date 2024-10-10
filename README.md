@@ -39,7 +39,7 @@ npm run flex-toast
 <br>
 
 ## run project on browser
-```sh
+```sh 
  http://localhost:4512/
 ```
 <br>
@@ -51,6 +51,8 @@ npm run flex-toast
 | Commands                    | Action                                       |
 | :-------------------------- | :--------------------------------------------|
 | `All Property`              | use camelCase                                |
+| `moveDiv`                   | move the position of flex-toast alert and    |
+|                             | display for X and Y coordinates on screen    |
 
 <br>
 
