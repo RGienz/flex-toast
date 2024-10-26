@@ -6,9 +6,14 @@
   "scripts": {
     "flex-toast": "node index.js"
   },
-  "keywords": ['toast','alert','notification'],
+  "keywords": [
+    "toast",
+    "notification",
+    "alert",
+    "flexible"
+  ],
   "author": "Renz Ross Gonzales",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "express": "^4.21.0"
   }
