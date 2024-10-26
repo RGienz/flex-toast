@@ -1,14 +1,19 @@
 {
   "name": "to2",
   "version": "1.0.0",
-  "description": "",
+  "description": "a minified and flexible alternative to sweetalert",
   "main": "index.js",
   "scripts": {
     "flex-toast": "node index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "toast",
+    "notification",
+    "alert",
+    "flexible"
+  ],
+  "author": "Renz Ross Gonzales",
+  "license": "MIT",
   "dependencies": {
     "express": "^4.21.0"
   }
