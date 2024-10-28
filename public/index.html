@@ -6,19 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <meta charset="utf-8" />
 
-    
+    <style>
+        /* body {
+            background: transparent;
+        }
+        v-app, #app {
+            background: rgba(0, 0, 0, 0.3);
+        }
+        .custom-color .v-text-field__slot input {
+            color: red;
+            font-size: 20px;
+            display: flex;
+        } */
+    </style>
 </head>
 <body>
     <div id="app">
         <v-app>
             <v-main>
 
-                <div style="display: flex; justify-content: center; align-items: center; width: 100vw; height: 100vh;background-color: gray;">
-                    <div style="display: flex; flex-direction: column; align-items: center;">
-                        <h2>Flex-Toast</h2>
-                        <v-btn @click="displayAlert()">button</v-btn>
+             
+
+                    <div style="display: flex; justify-content: center; align-items: center; width: 100vw; height: 100vh;background-color: gray ;">
+                        <div style="display: flex; flex-direction: column; align-items: center;">
+                            <h2>Flex-Toast</h2>
+                            <v-btn @click="displayAlert()">toast 1</v-btn>
+                            <v-btn style="margin-top:10px ;" @click="displayAlert1()">toast 2</v-btn>
+                        </div>
                     </div>
-                </div>
+                    
+                    
 
             </v-main>
         </v-app>
@@ -40,35 +57,130 @@
                 // this.displayAlert()
             },
             methods: {
+
                 displayAlert() {
-                    flexToast({ 
-                        // position: "top-end",
-                        // icon: "check-circle", 
-                        // icon: "account", 
-                        // title: "Flex-Toast Alert Working",
-                        // titleSize : '20px',
-                        // titleMarginLeft : '30px',
-                        // showConfirmButton: true, 
-                        // confirmButtonText: "Got it!", 
-                        // // showLoadingBar: false,
-                        // timer: 100, 
-                        // backgroundColor: 'rgba(0, 128, 0, 0.8)', 
-                        // textColor: 'white', 
-                        // fontSize: '20px',
-                        // // width: '300px', 
-                        // // height: '80px', 
-                        // loadingColor: 'blue', 
-                        // iconColor: 'orange', 
-                        // bodyBackgroundImage: 'url("https://cdn-icons-png.flaticon.com/512/400/400833.png")',
+                    flexToast({
+                        position: "top-end", 
+                       
+                        // importBackgroundImage: 'url("https://cdn-icons-png.flaticon.com/512/400/400833.png")',
+                        // backgroundSize : '380px 200px',
+                        // importBackgroundImage: 'url("https://cdn-icons-png.flaticon.com/512/284/284746.png")',
+                        // titleLeft : '50px',
+                        // iconLeft : '60px',
+                        // iconLeft : '250px',
+                        // iconTop : '-90px',
+                 
                     
                     });
-                }, 
+                },
+
+                displayAlert1() {
+                    flexToast({
+                        // div body  -------------------------------
+
+                        // flexPositionCheck :true,
+                        // backgroundColor: 'rgba(14, 234, 50, 0.43)',
+                        // backgroundColor: 'rgba(248, 241, 241, 0.7)',
+                        backgroundColor: 'white',
+                        position: 'custom',
+                        // position: 'top-start',
+                        customX: 141, 
+                        customY: 62,
+                        bWidth: '413px',
+                        bHeight: '192px',
+
+
+
+
+
+
+                        // -----------------------------------------
+
+
+
+
+
+
+
+                        // title / ZoomIn/Out----------------------
+                        
+                        // titleZoomOut : true,
+                        // titlePosition : true,
+                        // title: '꧁ᬊᬁᴀɴɢᴇʟᬊ᭄꧂',
+                        title: 'HELLO',
+                        titleX : 16,
+                        titleY : 0,
+                        titleSize : '52.03px',
+                        // titleBoxShadow : '0 8px 20px rgba(0, 0, 0, 0.5), 0 4px 30px rgba(0, 0, 0, 0.2)',
+
+
+
+
+
+                        // ----------------------------------------
+
+
+
+
+
+                        // icon mdi- / url image - ZoomIn/Out------
+
+                        // iconPosition : true,
+                        // iconZoomOut : true,
+                        iconUrl: 'https://static.vecteezy.com/system/resources/previews/018/930/415/non_2x/instagram-logo-instagram-icon-transparent-free-png.png', 
+                        // imageUrl: 'https://static.vecteezy.com/system/resources/previews/018/930/415/non_2x/instagram-logo-instagram-icon-transparent-free-png.png', 
+                        // icon : 'account',
+                        iconX : 305,
+                        iconY : -6,
+                        iconZoom : 1.20,
+
+
+
+                        // ---------------------------------------
+
+
+                       
+                        
+
+
+                       
+
+                        
+
+                         
+
+                        
+                    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    
+                },
+
+
             },
         });
     </script>
-    <style>
-     
-    </style>
+    
     
 </body>
+
+<style>
+
+</style>
+
 </html>
+
+
+
+
