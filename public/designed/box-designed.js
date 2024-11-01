@@ -1,3 +1,5 @@
+import { icon } from './components/icon/icon.js'
+
 let currentToast = null;
 let toastOptions = null;
 function flexToast(options) {
@@ -5,7 +7,7 @@ function flexToast(options) {
     const defaultOptions = {
         // defaul mdi position and icon 
         position: 'center', 
-        icon: 'check-circle', 
+        icon: 'check', 
         // title default name and size
         title: 'Flexible-alert', 
         titleSize : '30px',
@@ -177,246 +179,69 @@ function flexToast(options) {
     let isDraggingDiv = false;
     let offsetX, offsetY;
 
-        // Add for resize div
-        if (settings.flexPositionCheck) {
-            // Create a resize handle
-            const resizeHandle = document.createElement('div');
-            resizeHandle.style.width = '10px';
-            resizeHandle.style.height = '10px';
-            resizeHandle.style.position = 'absolute';
-            resizeHandle.style.right = '0';
-            resizeHandle.style.bottom = '0';
-            resizeHandle.style.backgroundColor = 'darkgray'; // Set background color
-            resizeHandle.style.cursor = 'nwse-resize'; // Set cursor style
-            alertDiv.appendChild(resizeHandle);
-        
-            alertDiv.onmousedown = function (e) {
-                if (e.target === resizeHandle) {
-                    isResizing = true;
-                } else {
-                    isDraggingDiv = true;
-                    offsetX = e.clientX - alertDiv.getBoundingClientRect().left;
-                    offsetY = e.clientY - alertDiv.getBoundingClientRect().top;
-                }
-        
-                document.onmousemove = function (e) {
-                    const newX = alertDiv.getBoundingClientRect().left;
-                    const newY = alertDiv.getBoundingClientRect().top;
-        
-                    if (isDraggingDiv) {
-                        const newLeft = e.clientX - offsetX;
-                        const newTop = e.clientY - offsetY;
-        
-                        alertDiv.style.left = newLeft + 'px';
-                        alertDiv.style.top = newTop + 'px';
-        
-                        positionDisplay.innerHTML = `X: ${newLeft.toFixed(0)},<br> Y: ${newTop.toFixed(0)}<br>Width: ${alertDiv.offsetWidth.toFixed(0)}px,<br> Height: ${alertDiv.offsetHeight.toFixed(2)}px`;
-                    } else if (isResizing) {
-                        const newWidth = e.clientX - alertDiv.getBoundingClientRect().left;
-                        const newHeight = e.clientY - alertDiv.getBoundingClientRect().top;
-        
-                        alertDiv.style.width = newWidth + 'px';
-                        alertDiv.style.height = newHeight + 'px';
-        
-                        positionDisplay.innerHTML = `X: ${newX.toFixed(0)},<br> Y: ${newY.toFixed(0)}<br>Width: ${newWidth.toFixed(0)}px,<br> Height: ${newHeight.toFixed(2)}px`;
-                    }
-                };
-        
-                document.onmouseup = function () {
-                    isDraggingDiv = false;
-                    isResizing = false;
-                    document.onmousemove = null;
-                    document.onmouseup = null;
-                };
-            };
-        }
-
-
-// Create icon element if provided
-if (settings.icon) {
-    let iconElement;
-
-
-    // Create an image element if iconUrl is provided
-    if (settings.iconUrl) {
-        iconElement = document.createElement('img');
-        iconElement.src = settings.iconUrl;
-        iconElement.style.position = 'absolute';
-        iconElement.style.width = settings.iconUrlWidth || 'auto'; // Use provided width or default
-        iconElement.style.height = settings.iconUrlHeight || 'auto'; // Use provided height or default
-    } else {
-        // Create a div for the MDI icon if no imageUrl is provided
-        iconElement = document.createElement('div');
-        iconElement.className = `mdi mdi-${settings.icon}`;
-        iconElement.style.position = 'absolute';
-        iconElement.style.color = 'white';
-        iconElement.style.fontSize = settings.iconSize || '16px'; // Default font size
-    }
-
-    // Set initial position for the icon
-    iconElement.style.left = `${settings.iconZoomPosition?.x || 10}px`; 
-    iconElement.style.top = `${settings.iconZoomPosition?.y || 10}px`; 
-
-    // Append the icon element to the alertDiv
-    alertDiv.appendChild(iconElement);
-
-  
-
-
-    iconElement.style.height = settings.iconHeight; 
-    iconElement.style.width = settings.iconWidth; 
-    iconElement.style.color = settings.iconColor; 
-    iconElement.style.fontSize = settings.iconSize;
-    iconElement.style.marginLeft = settings.iconLeft;
-    iconElement.style.marginRight = settings.iconRight;
-    iconElement.style.marginTop = settings.iconTop;
-    iconElement.style.marginBottom = settings.iconBottom;
-
-    alertDiv.appendChild(positionDisplay);
-
-    // Set initial position based on iconX and iconY if they exist
-    if (settings.iconX !== undefined && settings.iconY !== undefined) {
-        iconElement.style.left = `${settings.iconX}px`;
-        iconElement.style.top = `${settings.iconY}px`;
-    } else {
-        
-        iconElement.style.left = '10px';
-        iconElement.style.top = '10px'; 
-    }
-
-
-    if (settings.iconPosition) {
-       
-        // Set initial zoom level from options
-        let zoomLevel = settings.iconZoom || 1; // Default to 1 if not provided
-        const zoomDisplay = document.createElement('div'); 
-        zoomDisplay.style.position = 'absolute';
-        zoomDisplay.style.color = 'white';
-        zoomDisplay.style.bottom = '-40px'; 
-        zoomDisplay.style.left = '10px'; 
-        zoomDisplay.textContent = ''; 
-        zoomDisplay.style.fontWeight = 'bold';
-        zoomDisplay.style.fontSize = '20px';
-        // zoomDisplay.style.cursor = 'move';
-        zoomDisplay.style.marginLeft = '210px';
-        zoomDisplay.style.zIndex = 2;
-        alertDiv.appendChild(zoomDisplay);
-       
-
-        // Set initial position for the icon
-        iconElement.style.left = `${settings.iconZoomPosition?.x || 10}px`; 
-        iconElement.style.top = `${settings.iconZoomPosition?.y || 10}px`; 
-        iconElement.style.cursor = 'move';
-        // Append the icon element to the alertDiv
-        alertDiv.appendChild(iconElement);
-
-        // Set the initial zoom level
-        iconElement.style.transform = `scale(${zoomLevel})`;
-
-        // Zoom functionality
-        if (settings.iconZoomOut === false) {
-            iconElement.addEventListener('wheel', (e) => {
-                e.preventDefault(); 
-                const zoomAmount = e.deltaY > 0 ? -0.1 : 0.1; 
-                zoomLevel = Math.max(0.1, zoomLevel + zoomAmount); 
-
-                // Update icon size
-                iconElement.style.transform = `scale(${zoomLevel})`;
-
-                // Update zoom display only when zooming
-                zoomDisplay.textContent = `Zoom Level: ${zoomLevel.toFixed(2)}`;
-            });
-        }
-
-        // Make the icon draggable within the alert div
-        let isDraggingIcon = false;
-        let startX, startY, startLeft, startTop;
-
-        // Create a position display element
-        const positionDisplay = document.createElement('div');
-        positionDisplay.style.position = 'absolute';
-        positionDisplay.style.bottom = '-40px'; 
-        positionDisplay.style.left = '10px';
-        positionDisplay.style.fontWeight = 'bold';
-        positionDisplay.style.fontSize = '20px';
-        positionDisplay.style.zIndex = 2;
-
-        iconElement.style.height = settings.iconHeight; 
-        iconElement.style.width = settings.iconWidth; 
-        iconElement.style.color = settings.iconColor; 
-        iconElement.style.fontSize = settings.iconSize;
-        iconElement.style.marginLeft = settings.iconLeft;
-        iconElement.style.marginRight = settings.iconRight;
-        iconElement.style.marginTop = settings.iconTop;
-        iconElement.style.marginBottom = settings.iconBottom;
-
-        alertDiv.appendChild(positionDisplay);
-
-        // Set initial position based on iconX and iconY if they exist
-        if (settings.iconX !== undefined && settings.iconY !== undefined) {
-            iconElement.style.left = `${settings.iconX}px`;
-            iconElement.style.top = `${settings.iconY}px`;
-        } else {
-            // Default position if iconX and iconY are not provided
-            iconElement.style.left = '10px'; 
-            iconElement.style.top = '10px';
-        }
-
-            iconElement.addEventListener("mousedown", (e) => {
-            isDraggingIcon = true;
-            startX = e.clientX;
-            startY = e.clientY;
-            startLeft = parseInt(iconElement.style.left, 10) || 0;
-            startTop = parseInt(iconElement.style.top, 10
-                ) || 0;
-
-                // Prevent text selection
-                e.preventDefault();
-            });
-        
-            document.addEventListener("mousemove", (e) => {
-                if (isDraggingIcon) {
-                    const left = startLeft + e.clientX - startX;
-                    const top = startTop + e.clientY - startY;
-        
-                    // Update the icon's position without constraints
-                    iconElement.style.left = left + "px";
-                    iconElement.style.top = top + "px";
-        
-                    // Update the position display
-                    positionDisplay.textContent = `Icon X: ${parseInt(iconElement.style.left, 10)}, Icon Y: ${parseInt(iconElement.style.top, 10)}`;
-                }
-            });
-        
-            document.addEventListener("mouseup", () => {
-                if (isDraggingIcon) {
-                    isDraggingIcon = false;
-                    // Display the last known position when the icon is not held
-                    positionDisplay.textContent = `Icon X: ${parseInt(iconElement.style.left, 10)}, Icon Y: ${parseInt(iconElement.style.top, 10)}`;
-                }
-            });
-        
-            document.addEventListener("mouseleave", () => {
-                if (isDraggingIcon) {
-                    isDraggingIcon = false;
-                    // Display the last known position when the mouse leaves the document
-                    positionDisplay.textContent = `Icon X: ${parseInt(iconElement.style.left, 10)}, Icon Y: ${parseInt(iconElement.style.top, 10)}`;
-                }
-            });
-
-        
-    } 
-
+    // Add for resize div
+    if (settings.flexPositionCheck) {
+        // Create a resize handle
+        const resizeHandle = document.createElement('div');
+        resizeHandle.style.width = '10px';
+        resizeHandle.style.height = '10px';
+        resizeHandle.style.position = 'absolute';
+        resizeHandle.style.right = '0';
+        resizeHandle.style.bottom = '0';
+        resizeHandle.style.backgroundColor = 'darkgray'; // Set background color
+        resizeHandle.style.cursor = 'nwse-resize'; // Set cursor style
+        alertDiv.appendChild(resizeHandle);
     
-}
+        alertDiv.onmousedown = function (e) {
+            if (e.target === resizeHandle) {
+                isResizing = true;
+            } else {
+                isDraggingDiv = true;
+                offsetX = e.clientX - alertDiv.getBoundingClientRect().left;
+                offsetY = e.clientY - alertDiv.getBoundingClientRect().top;
+            }
+    
+            document.onmousemove = function (e) {
+                const newX = alertDiv.getBoundingClientRect().left;
+                const newY = alertDiv.getBoundingClientRect().top;
+    
+                if (isDraggingDiv) {
+                    const newLeft = e.clientX - offsetX;
+                    const newTop = e.clientY - offsetY;
+    
+                    alertDiv.style.left = newLeft + 'px';
+                    alertDiv.style.top = newTop + 'px';
+    
+                    positionDisplay.innerHTML = `X: ${newLeft.toFixed(0)},<br> Y: ${newTop.toFixed(0)}<br>Width: ${alertDiv.offsetWidth.toFixed(0)}px,<br> Height: ${alertDiv.offsetHeight.toFixed(2)}px`;
+                } else if (isResizing) {
+                    const newWidth = e.clientX - alertDiv.getBoundingClientRect().left;
+                    const newHeight = e.clientY - alertDiv.getBoundingClientRect().top;
+    
+                    alertDiv.style.width = newWidth + 'px';
+                    alertDiv.style.height = newHeight + 'px';
+    
+                    positionDisplay.innerHTML = `X: ${newX.toFixed(0)},<br> Y: ${newY.toFixed(0)}<br>Width: ${newWidth.toFixed(0)}px,<br> Height: ${newHeight.toFixed(2)}px`;
+                }
+            };
+    
+            document.onmouseup = function () {
+                isDraggingDiv = false;
+                isResizing = false;
+                document.onmousemove = null;
+                document.onmouseup = null;
+            };
+        };
+    }
 
-
-
-
+    // change icon element if provided
+    // ... @ separated from icon.js 
+    // ...
+    icon(settings, settings.icon, alertDiv, positionDisplay);
+    // ...
+    // ... @ separated from icon.js 
 
     if (settings.titlePosition) {
 
-            
         let zoomtitleLevel = settings.iconZoom; 
         const zoomTitleDisplay = document.createElement('div'); 
         zoomTitleDisplay.style.position = 'absolute';
